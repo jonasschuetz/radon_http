@@ -4,7 +4,18 @@ import 'radon_http.dart';
 ///
 /// Override methods in this class to set up routes and initialize services like
 /// database connections. See http://aqueduct.io/docs/http/channel/.
+class MyConfiguration extends Configuration {
+  MyConfiguration(String configPath) : super.fromFile(File("config.yaml"));
+
+  DatabaseConfiguration database;
+}
+
 class RadonHttpChannel extends ApplicationChannel {
+
+  ManagedContext context;
+
+
+
   /// Initialize services in this method.
   ///
   /// Implement this method to initialize services, read values from [options]
@@ -14,6 +25,19 @@ class RadonHttpChannel extends ApplicationChannel {
   @override
   Future prepare() async {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
+
+    final config = MyConfiguration(options.configurationFilePath);
+
+    final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
+    final psc = PostgreSQLPersistentStore.fromConnectionInfo(
+        config.database.username,
+        config.database.password,
+        config.database.host,
+        config.database.port,
+        config.database.databaseName);
+
+    context = ManagedContext(dataModel, psc);
+
   }
 
   /// Construct the request channel.
@@ -29,10 +53,10 @@ class RadonHttpChannel extends ApplicationChannel {
     // Prefer to use `link` instead of `linkFunction`.
     // See: https://aqueduct.io/docs/http/request_controller/
     router
-      .route("/example")
-      .linkFunction((request) async {
-        return Response.ok({"key": "value"});
-      });
+        .route("/example")
+        .linkFunction((request) async {
+      return Response.ok({"key": "value"});
+    });
 
     return router;
   }
