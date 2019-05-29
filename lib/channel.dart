@@ -1,5 +1,6 @@
 import 'radon_http.dart';
 import 'controller/roomController.dart';
+import 'controller/stayController.dart';
 import 'model/stay.dart';
 import 'model/room.dart';
 
@@ -60,8 +61,12 @@ class RadonHttpChannel extends ApplicationChannel {
     });
 
     router
-    .route("/rooms")
-    .link(()=>RoomController(context));
+        .route("/rooms")
+        .link(()=>RoomController(context));
+
+    router
+        .route("/stays")
+        .link(()=>StayController(context));
 
     return router;
   }
