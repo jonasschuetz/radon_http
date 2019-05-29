@@ -12,7 +12,6 @@ class StayController extends ResourceController{
     final stays = await stayQuery.fetch();
 
     return Response.ok(stays);
-
   }
 
   @Operation.get('id') 
@@ -26,4 +25,13 @@ class StayController extends ResourceController{
     }
     return Response.ok(stay);
   }
+  @Operation.post()
+  Future<Response> createStay(@Bind.body() Stay inputStay) async {
+    final query = Query<Stay>(context)
+    ..values = inputStay;
+
+    final insertedStay = await query.insert();
+
+    return Response.ok(insertedStay);
   }
+}

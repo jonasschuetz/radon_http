@@ -1,4 +1,7 @@
 import 'radon_http.dart';
+import 'controller/roomController.dart';
+import 'model/stay.dart';
+import 'model/room.dart';
 
 /// This type initializes an application.
 ///
@@ -24,12 +27,10 @@ class RadonHttpChannel extends ApplicationChannel {
   /// This method is invoked prior to [entryPoint] being accessed.
   @override
   Future prepare() async {
-    logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
-
     final config = MyConfiguration(options.configurationFilePath);
 
-    final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
-    final psc = PostgreSQLPersistentStore.fromConnectionInfo(
+    var dataModel = ManagedDataModel.fromCurrentMirrorSystem();
+    var psc = PostgreSQLPersistentStore.fromConnectionInfo(
         config.database.username,
         config.database.password,
         config.database.host,
@@ -57,6 +58,10 @@ class RadonHttpChannel extends ApplicationChannel {
         .linkFunction((request) async {
       return Response.ok({"key": "value"});
     });
+
+    router
+    .route("/rooms")
+    .link(()=>RoomController(context));
 
     return router;
   }

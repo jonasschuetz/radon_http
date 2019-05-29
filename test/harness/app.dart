@@ -19,11 +19,20 @@ export 'package:aqueduct/aqueduct.dart';
 ///           });
 ///         }
 ///
+///
+class StayTest{
+      StayTest({this.id, this.startTime, this.endTime, this.dose});
+      final int id;
+      DateTime startTime;
+      DateTime endTime;
+      int dose;
+    }
 class Harness extends TestHarness<RadonHttpChannel> {
+   
   @override
   Future onSetUp() async {
-
   }
+   
 
   @override
   Future onTearDown() async {

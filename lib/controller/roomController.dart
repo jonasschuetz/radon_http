@@ -25,4 +25,6 @@ class RoomController extends ResourceController{
     }
     return Response.ok(room);
   }
+
+
 }
