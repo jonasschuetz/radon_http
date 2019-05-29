@@ -27,6 +27,3 @@ class StayController extends ResourceController{
     return Response.ok(stay);
   }
   }
-
-}
-

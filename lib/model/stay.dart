@@ -8,10 +8,10 @@ class _Stay {
 
   @Column(unique: false, nullable: true)
   String name;
-  @Column(unique: false)
+  @Column(unique: false, nullable: false)
   DateTime startTime;
-  @Column(unique: false)
+  @Column(unique: false, nullable: false)
   DateTime endTime;
-  @Column(unique: false)
+  @Column(unique: false, nullable: false)
   int dose;
 }
