@@ -4,14 +4,14 @@ class Stay extends ManagedObject<_Stay> implements _Stay {}
 
 class _Stay {
   @primaryKey
-  int S_id;
+  int id;
 
-  @Column(unique: false)
+  @Column(unique: false, nullable: true)
   String name;
   @Column(unique: false)
-  DateTime starttime;
+  DateTime startTime;
   @Column(unique: false)
-  DateTime endtime;
+  DateTime endTime;
   @Column(unique: false)
   int dose;
 }
