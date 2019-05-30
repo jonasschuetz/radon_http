@@ -27,9 +27,12 @@ class StayController extends ResourceController{
   }
   @Operation.post()
   Future<Response> createStay() async {
-    final stay = Stay()
-    ..read(await request.body.decode() );
-    final query = Query<Stay>(context)..values = stay;
+    final map = request.body.as<Map<String, dynamic>>();
+
+    final response = Response.ok(map)
+    ..contentType = ContentType.json;
+
+
 
     var insertedStay = await query.insert();
 

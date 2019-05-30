@@ -1,5 +1,5 @@
 username: "dart_app"
 password: "RADON2019"
-host: "86.119.40.8"
+host: localhost
 port: 5432
 databaseName: "radon_base"
