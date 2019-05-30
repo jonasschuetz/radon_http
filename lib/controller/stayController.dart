@@ -27,11 +27,14 @@ class StayController extends ResourceController{
   }
   @Operation.post()
   Future<Response> createStay() async {
-    final stay = Stay()
-      ..read(await request.body.decode() );
-    final query = Query<Stay>(context)..values = stay;
+    final map = await request.body.decode<Map<String, String>>();
+    final query = Query<Stay>(context)
+    ..values.id = int.parse(map['id'])
+    ..values.startTime = DateTime.parse(map['startTime'])
+    ..values.endTime = DateTime.parse(map['endTime'])
+    ..values.dose = int.parse(map['dose']);
 
-    var insertedStay = await query.insert();
+    final insertedStay = await query.insert();
 
     return Response.ok(insertedStay);
   }
