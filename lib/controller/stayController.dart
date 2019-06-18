@@ -44,13 +44,10 @@ class StayController extends ResourceController {
 
     final Map<String, dynamic> json = await request.body.decode();
     final query = Query<Stay>(context)
-      ..values.startTime = DateTime.now() //json["startTime"] == null
-//    ? null
-//    : DateTime.parse(json["startTime"].first.toString() )
-      ..values.endTime = DateTime.now() //json["endTime"] == null
-//    ? null
-//        : DateTime.parse(json["endTime"].first.toString())
+      ..values.startTime = DateTime.parse(json["startTime"].first.toString() )
+      ..values.endTime = DateTime.parse(json["endTime"].first.toString())
       ..values.dose = int.parse(json["dose"].first.toString());
+      
 
 
     final insertedStay = query.insert();
