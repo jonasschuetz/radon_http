@@ -44,7 +44,6 @@ class StayController extends ResourceController {
 
     final Map<String, dynamic> json = await request.body.decode();
     final query = Query<Stay>(context)
-      ..values.id = int.parse(json["id"].first.toString())
       ..values.startTime = DateTime.now() //json["startTime"] == null
 //    ? null
 //    : DateTime.parse(json["startTime"].first.toString() )

@@ -8,8 +8,11 @@ class Stay extends ManagedObject<_Stay> implements _Stay {
 
 class _Stay {
 
-  @primaryKey
+
+
+  @Column(primaryKey: true, autoincrement: true)
   int id;
+  
   @Column(unique: false, nullable: true)
   DateTime startTime;
   @Column(unique: false, nullable: true)

@@ -1,8 +1,9 @@
-import 'radon_http.dart';
+import 'dart:io';
 import 'controller/roomController.dart';
 import 'controller/stayController.dart';
-import 'model/stay.dart';
-import 'model/room.dart';
+import 'radon_http.dart';
+
+
 
 /// This type initializes an application.
 ///
@@ -62,7 +63,7 @@ class RadonHttpChannel extends ApplicationChannel {
 
     router
         .route("/rooms")
-        .link(()=>RoomController(context));
+        .link(()=> RoomController(context));
 
     router
         .route("/stays")
